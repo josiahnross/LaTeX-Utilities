@@ -16,7 +16,7 @@ export class MacroDefinitions implements vscode.DefinitionProvider {
         _token: vscode.CancellationToken
     ) {
         try {
-            const enabled = vscode.workspace.getConfiguration('latex-utilities.texdef').get('enabled');
+            const enabled = vscode.workspace.getConfiguration('josiah-latex-utilities.texdef').get('enabled');
             if (!enabled) {
                 return;
             }

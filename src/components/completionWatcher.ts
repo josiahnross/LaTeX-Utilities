@@ -53,7 +53,7 @@ export class CompletionWatcher {
     constructor(extension: Extension) {
         this.extension = extension;
         this.typeFinder = new TypeFinder();
-        this.enabled = vscode.workspace.getConfiguration('latex-utilities').get('liveReformat.enabled') as boolean;
+        this.enabled = vscode.workspace.getConfiguration('josiah-latex-utilities').get('liveReformat.enabled') as boolean;
         this.configAge = +new Date();
         vscode.workspace.onDidChangeTextDocument(this.watcher, this);
         this.snippetFile = {
@@ -94,7 +94,7 @@ export class CompletionWatcher {
 
     public async watcher(e: vscode.TextDocumentChangeEvent) {
         if (+new Date() - this.configAge > this.MAX_CONFIG_AGE) {
-            this.enabled = vscode.workspace.getConfiguration('latex-utilities').get('liveReformat.enabled') as boolean;
+            this.enabled = vscode.workspace.getConfiguration('josiah-latex-utilities').get('liveReformat.enabled') as boolean;
             this.configAge = +new Date();
         }
 
@@ -316,7 +316,7 @@ export class CompletionWatcher {
                 )
                 .then(option => {
                     if (option === 'Keep using the extension snippet file') {
-                        vscode.commands.executeCommand('latex-utilities.resetLiveSnippetsFile');
+                        vscode.commands.executeCommand('josiah-latex-utilities.resetLiveSnippetsFile');
                     }
                 });
         }

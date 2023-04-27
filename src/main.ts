@@ -21,37 +21,37 @@ export function activate(context: vscode.ExtensionContext) {
     extension.logger.addLogMessage('LaTeX Utilities Started');
 
     context.subscriptions.push(
-        vscode.commands.registerCommand('latex-utilities.editLiveSnippetsFile', () =>
+        vscode.commands.registerCommand('josiah-latex-utilities.editLiveSnippetsFile', () =>
             extension.withTelemetry('editLiveSnippetsFile', () => {
                 extension.completionWatcher.editSnippetsFile();
             })
         ),
-        vscode.commands.registerCommand('latex-utilities.resetLiveSnippetsFile', () =>
+        vscode.commands.registerCommand('josiah-latex-utilities.resetLiveSnippetsFile', () =>
             extension.withTelemetry('resetLiveSnippetsFile', () => {
                 extension.completionWatcher.resetSnippetsFile();
             })
         ),
-        vscode.commands.registerCommand('latex-utilities.compareLiveSnippetsFile', () =>
+        vscode.commands.registerCommand('josiah-latex-utilities.compareLiveSnippetsFile', () =>
             extension.withTelemetry('compareLiveSnippetsFile', () => {
                 extension.completionWatcher.compareSnippetsFile();
             })
         ),
-        vscode.commands.registerCommand('latex-utilities.formattedPaste', () =>
+        vscode.commands.registerCommand('josiah-latex-utilities.formattedPaste', () =>
             extension.withTelemetry('formattedPaste', () => {
                 extension.paster.paste();
             })
         ),
-        vscode.commands.registerCommand('latex-utilities.citeZotero', () =>
+        vscode.commands.registerCommand('josiah-latex-utilities.citeZotero', () =>
             extension.withTelemetry('citeZotero', () => {
                 extension.zotero.cite();
             })
         ),
-        vscode.commands.registerCommand('latex-utilities.openInZotero', () =>
+        vscode.commands.registerCommand('josiah-latex-utilities.openInZotero', () =>
             extension.withTelemetry('openInZotero', () => {
                 extension.zotero.openCitation();
             })
         ),
-        vscode.commands.registerCommand('latex-utilities.selectWordcountFormat', () =>
+        vscode.commands.registerCommand('josiah-latex-utilities.selectWordcountFormat', () =>
             extension.withTelemetry('selectWordcountFormat', () => {
                 extension.wordCounter.pickFormat();
             })
@@ -116,7 +116,7 @@ function newVersionMessage(extensionPath: string) {
             return;
         }
         fs.writeFileSync(`${extensionPath}${path.sep}VERSION`, extension.packageInfo.version);
-        const configuration = vscode.workspace.getConfiguration('latex-utilities');
+        const configuration = vscode.workspace.getConfiguration('josiah-latex-utilities');
         if (!(configuration.get('message.update.show') as boolean)) {
             return;
         }
@@ -166,9 +166,9 @@ export class Extension {
 
     constructor() {
         this.extensionRoot = path.resolve(`${__dirname}/../`);
-        const self = vscode.extensions.getExtension('tecosaur.latex-utilities') as vscode.Extension<any>;
+        const self = vscode.extensions.getExtension('tecosaur.josiah-latex-utilities') as vscode.Extension<any>;
         this.telemetryReporter = new TelemetryReporter(
-            'tecosaur.latex-utilities',
+            'tecosaur.josiah-latex-utilities',
             self.packageJSON.version,
             '11a955d7-02dc-4c1a-85e4-053858f88af0'
         );

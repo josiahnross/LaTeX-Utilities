@@ -76,7 +76,7 @@ export class Paster {
                 this.reformatText(
                     clipboardContents,
                     true,
-                    vscode.workspace.getConfiguration('latex-utilities.formattedPaste').get('maxLineLength') as number,
+                    vscode.workspace.getConfiguration('josiah-latex-utilities.formattedPaste').get('maxLineLength') as number,
                     editor
                 )
             );
@@ -117,7 +117,7 @@ export class Paster {
 
     public async pasteTable(editor: vscode.TextEditor, content: string, delimiter?: string) {
         this.extension.logger.addLogMessage('Pasting: Table');
-        const configuration = vscode.workspace.getConfiguration('latex-utilities.formattedPaste');
+        const configuration = vscode.workspace.getConfiguration('josiah-latex-utilities.formattedPaste');
 
         const columnDelimiter: string = delimiter || configuration.customTableDelimiter;
         const columnType: string = configuration.tableColumnType;
@@ -487,12 +487,12 @@ export class Paster {
     }
 
     public loadImageConfig(projectPath: string, filePath: string) {
-        const config = vscode.workspace.getConfiguration('latex-utilities.formattedPaste.image');
+        const config = vscode.workspace.getConfiguration('josiah-latex-utilities.formattedPaste.image');
 
         // load other config
         const pasteTemplate: string | string[] | undefined = config.get('template');
         if (pasteTemplate === undefined) {
-            throw new Error('No config value found for latex-utilities.imagePaste.template');
+            throw new Error('No config value found for josiah-latex-utilities.imagePaste.template');
         }
         if (typeof pasteTemplate === 'string') {
             this.pasteTemplate = pasteTemplate;
@@ -797,7 +797,7 @@ export class Paster {
         let graphicsPath: string | string[] = this.extension.manager.getGraphicsPath(text);
         graphicsPath = graphicsPath.length !== 0 ? graphicsPath[0] : this.graphicsPathFallback;
         graphicsPath = path.resolve(currentFileDir, graphicsPath);
-        const override = vscode.workspace.getConfiguration('latex-utilities.formattedPaste').get('imagePathOverride') as string;
+        const override = vscode.workspace.getConfiguration('josiah-latex-utilities.formattedPaste').get('imagePathOverride') as string;
         if (override.length !== 0) {
             graphicsPath = override;
         }
